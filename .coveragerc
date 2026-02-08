@@ -1,0 +1,18 @@
+[run]
+# Coverage configuration
+source = .
+omit =
+    */tests/*
+    */venv/*
+    */__pycache__/*
+    */site-packages/*
+    setup.py
+
+[report]
+# Report configuration
+precision = 2
+show_missing = True
+skip_covered = False
+
+[html]
+directory = htmlcov

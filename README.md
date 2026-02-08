@@ -83,6 +83,8 @@ cc-metar-reader/
 ├── app.py                 # Main Flask application
 ├── config.py              # Configuration settings
 ├── requirements.txt       # Python dependencies
+├── pytest.ini             # Pytest configuration
+├── .coveragerc            # Coverage configuration
 ├── services/              # Business logic
 │   ├── metar_fetcher.py  # API integration
 │   └── metar_parser.py   # METAR decoding
@@ -91,11 +93,68 @@ cc-metar-reader/
 ├── templates/             # HTML templates
 │   ├── base.html
 │   └── index.html
-└── static/                # Static assets
-    ├── css/
-    │   └── style.css
-    └── js/
-        └── main.js
+├── static/                # Static assets
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── main.js
+└── tests/                 # Test suite
+    ├── conftest.py        # Pytest fixtures
+    ├── test_app.py        # Flask route tests
+    ├── test_metar_parser.py  # Parser tests
+    └── test_formatters.py # Formatter tests
+```
+
+## Testing
+
+The application includes a comprehensive test suite with 67 tests covering all major functionality.
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# Run tests with coverage report
+pytest tests/ --cov=. --cov-report=html
+
+# Run specific test file
+pytest tests/test_app.py -v
+
+# Run specific test class
+pytest tests/test_app.py::TestWeatherAPI -v
+```
+
+### Test Coverage
+
+- **67 tests** across 3 test modules
+- **85.25%** code coverage
+- Tests use real METAR strings for authentic parsing validation
+- Mocked external API calls for fast, reliable testing
+
+### Test Structure
+
+```
+tests/
+├── conftest.py              # Pytest fixtures and sample METARs
+├── test_app.py              # Flask route and API endpoint tests (11 tests)
+├── test_metar_parser.py     # METAR parsing with real data (19 tests)
+└── test_formatters.py       # Human-readable formatting tests (37 tests)
+```
+
+### Test Categories
+
+- **Route Tests**: Home page, API endpoints, error handling
+- **Parser Tests**: Real METAR strings (clear, rain, snow, fog, thunderstorms)
+- **Formatter Tests**: Temperature, wind, visibility, pressure, sky conditions
+- **Edge Cases**: Invalid inputs, missing data, extreme weather
+
+### Viewing Coverage Report
+
+After running tests with coverage, open the HTML report:
+```bash
+open htmlcov/index.html  # macOS
+xdg-open htmlcov/index.html  # Linux
 ```
 
 ## Production Deployment
