@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="search-section">
+    <form id="weather-form">
+        <div class="form-group">
+            <label for="icao-input">Enter Airport ICAO Code:</label>
+            <input
+                type="text"
+                id="icao-input"
+                name="icao"
+                placeholder="e.g., KHIO"
+                maxlength="4"
+                required
+                autocomplete="off"
+            >
+            <button type="submit" id="submit-btn">Get Weather</button>
+        </div>
+        <p class="help-text">Enter a 4-letter airport code (e.g., KHIO, KJFK, KSEA)</p>
+    </form>
+
+    <div class="examples">
+        <p><strong>Example airports:</strong></p>
+        <div class="example-codes">
+            <button class="example-code" data-code="KHIO">KHIO - Portland-Hillsboro, OR</button>
+            <button class="example-code" data-code="KJFK">KJFK - New York JFK</button>
+            <button class="example-code" data-code="KSEA">KSEA - Seattle-Tacoma, WA</button>
+            <button class="example-code" data-code="EGLL">EGLL - London Heathrow</button>
+        </div>
+    </div>
+</div>
+
+<div id="loading" class="loading" style="display: none;">
+    <div class="spinner"></div>
+    <p>Fetching weather data...</p>
+</div>
+
+<div id="error-message" class="error-message" style="display: none;"></div>
+
+<div id="weather-results" class="weather-results" style="display: none;">
+    <div class="summary-section">
+        <h2>Weather Summary</h2>
+        <div id="weather-summary" class="summary-box"></div>
+    </div>
+
+    <div class="details-section">
+        <h2>Detailed Information</h2>
+        <table id="weather-table" class="weather-table">
+            <tbody id="weather-table-body">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="raw-section">
+        <details>
+            <summary>View Raw METAR</summary>
+            <div id="raw-metar" class="raw-metar"></div>
+        </details>
+    </div>
+</div>
+{% endblock %}
